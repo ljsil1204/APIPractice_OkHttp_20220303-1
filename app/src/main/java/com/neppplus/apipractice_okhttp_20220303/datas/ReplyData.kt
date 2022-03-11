@@ -21,6 +21,10 @@ class ReplyData(
     var likeCount = 0
     var hateCount = 0
 
+//    내가 좋아요 / 싫어요를 찍은 댓글인지
+    var isMyLike = false
+    var isMyHate = false
+
 
     //    보조 생성자 추가 연습 : 파라미터 x.
     constructor() :  this( 0, "내용없음" )
@@ -136,6 +140,9 @@ class ReplyData(
             replyData.reReplyCount = jsonObj.getInt("reply_count")
             replyData.likeCount = jsonObj.getInt("like_count")
             replyData.hateCount = jsonObj.getInt("dislike_count")
+
+            replyData.isMyLike = jsonObj.getBoolean("my_like")
+            replyData.isMyHate = jsonObj.getBoolean("my_dislike")
 
             return replyData
 
