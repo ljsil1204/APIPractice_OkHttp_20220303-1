@@ -1,5 +1,6 @@
 package com.neppplus.apipractice_okhttp_20220303
 
+import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -14,6 +15,16 @@ abstract class BaseActivity : AppCompatActivity() {
 //    미리 mContext 변수에, 화면의 this를 담아두고 => 모든 액티비티에 상속으로 물려주자.
 
     val mContext = this
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        supportActionBar?.let {
+//            supportActionBar변수가  null이 아닐때만 실행할 코드
+            setCustomActionBar()
+        }
+
+    }
 
 
 //    setupEvents / setValues 함수를 만들어두고, 물려주자.
