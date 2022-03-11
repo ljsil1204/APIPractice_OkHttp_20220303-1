@@ -112,7 +112,8 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         setTopicDataToUi()
 
-        getTopicDetailFromServer()
+//        어차피 onResume에서 서버에 연결 예정.
+//        getTopicDetailFromServer()
     }
 
     fun setTopicDataToUi() {
@@ -179,6 +180,12 @@ class ViewTopicDetailActivity : BaseActivity() {
                     setTopicDataToUi()
                 }
 
+//                mReplyList에, 댓글목록이 추가 된다
+//                  => 기존에 다른 댓글들이 들어있다면, 그 뒤에 이어서 추가 된다.
+//                  => 기존 댓글 목록을 전부 삭제하고 나서, 추가하자.
+
+                mReplyList.clear()
+
 //                topicObj 내부에는, replies라는 댓글 목록 JSONArray도 들어있다.
 //                mReplyList에 넣어주자.
 
@@ -203,5 +210,14 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     }
 
+
+//    이 화면에 들어올때마다, 댓글 목록 새로고침.
+
+    override fun onResume() {
+        super.onResume()
+
+        getTopicDetailFromServer()
+
+    }
 
 }
