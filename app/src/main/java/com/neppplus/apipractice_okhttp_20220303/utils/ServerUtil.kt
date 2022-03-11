@@ -315,6 +315,43 @@ class ServerUtil {
 
         }
 
+        fun postRequestTopicReply( context: Context, topicId: Int, content: String, handler: JsonResponseHandler? ) {
+
+            val urlString = "${BASE_URL}/topic_reply"
+
+            val formData = FormBody.Builder()
+                .add("topic_id", topicId.toString())
+                .add("content", content)
+                .build()
+
+            val request = Request.Builder()
+                .url(urlString)
+                .post(formData)
+                .header("X-Http-Token", ContextUtil.getToken(context))
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).enqueue( object : Callback {
+
+                override fun onFailure(call: Call, e: IOException) {
+
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+
+                    val bodyString = response.body!!.string()
+                    val jsonObj = JSONObject( bodyString )
+                    Log.d("서버응답", jsonObj.toString())
+                    handler?.onResponse(jsonObj)
+
+                }
+
+            } )
+
+
+        }
+
     }
 
 }
