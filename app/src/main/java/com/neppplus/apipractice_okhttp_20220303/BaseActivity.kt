@@ -1,5 +1,6 @@
 package com.neppplus.apipractice_okhttp_20220303
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -14,10 +15,13 @@ abstract class BaseActivity : AppCompatActivity() {
 
 //    미리 mContext 변수에, 화면의 this를 담아두고 => 모든 액티비티에 상속으로 물려주자.
 
-    val mContext = this
+    lateinit var mContext : Context
 
+//    액티비티의 생명 주기를 가지고 있다.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mContext = this //화면이 만들어 질떼 this 대입.
 
         supportActionBar?.let {
 //            supportActionBar변수가  null이 아닐때만 실행할 코드
