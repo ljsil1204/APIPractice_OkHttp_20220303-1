@@ -2,6 +2,7 @@ package com.neppplus.apipractice_okhttp_20220303
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -17,11 +18,17 @@ abstract class BaseActivity : AppCompatActivity() {
 
     lateinit var mContext : Context
 
+//    액션바의 UI 변수를 멤버변수로 > 상속 가능
+//      => 변수에 대입 : 커스텀 액션바 세팅 뒤에.
+
+    lateinit var btnBack : ImageView
+
+
 //    액티비티의 생명 주기를 가지고 있다.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mContext = this //화면이 만들어 질떼 this 대입.
+        mContext = this // 화면이 만들어 질떼 this 대입.
 
         supportActionBar?.let {
 //            supportActionBar변수가  null이 아닐때만 실행할 코드
@@ -50,6 +57,16 @@ abstract class BaseActivity : AppCompatActivity() {
 
         val toolbar = defultActionBar.customView.parent as Toolbar
         toolbar.setContentInsetsAbsolute(0,0)
+
+
+//        xml에 그려둔 UI 가져오기
+        btnBack = defultActionBar.customView.findViewById(R.id.btnBack)
+
+//        누르면 화면 종료 : 모든 화면 공통
+        btnBack.setOnClickListener {
+            finish()
+        }
+
 
     }
 
