@@ -11,4 +11,5 @@
     <color name="deep_dark_gray">#555555</color>
     <color name="naver_red">#E36452</color>
     <color name="naver_blue">#3B5685</color>
+    <color name="light_gray">#DDDDDD</color>
 </resources>
