@@ -47,6 +47,22 @@ class EditReplyActivity : BaseActivity() {
 
                     override fun onResponse(jsonObj: JSONObject) {
 
+//                        서버는 댓글 등록 성공/실패만 알려줌.
+
+                        val code = jsonObj.getInt("code")
+
+                        runOnUiThread {
+                            if (code == 200){
+                                Toast.makeText(mContext, "댓글 등록에 성공했습니다.", Toast.LENGTH_SHORT).show()
+
+                                finish()
+                            }
+                            else {
+                                val message = jsonObj.getString("message")
+                                Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
                     }
 
                 }
