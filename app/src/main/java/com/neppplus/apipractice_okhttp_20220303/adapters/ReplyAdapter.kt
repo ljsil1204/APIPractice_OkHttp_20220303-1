@@ -102,13 +102,15 @@ class ReplyAdapter(
 
 //        [도전과제] 싫어요가 눌려도 마찬가지 처리. => 싫어도 API 호출 (기존 함수 활용) + 토론 상세화면 댓글 목록 새로고침
 
-//        좋아요가 눌렸는지, 아닌지. 글씨 색상 변경
+//        좋아요가 눌렸는지, 아닌지. 글씨 색상 변경 / 배경 drawable도 설정.
 
         if (data.isMyLike){
             txtLikeCount.setTextColor(ContextCompat.getColor(mContext, R.color.naver_red))
+            txtLikeCount.setBackgroundResource(R.drawable.naver_red_border_box)
         }
         else{
             txtLikeCount.setTextColor(ContextCompat.getColor(mContext, R.color.deep_dark_gray))
+            txtLikeCount.setBackgroundResource(R.drawable.dark_gray_border_box)
         }
 
         return row
