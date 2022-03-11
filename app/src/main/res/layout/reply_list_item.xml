@@ -51,6 +51,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/txtReReplyCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dark_gray_border_box"
@@ -63,6 +64,7 @@
             android:layout_weight="1" />
 
         <TextView
+            android:id="@+id/txtLikeCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -70,13 +72,13 @@
             android:text="좋아요 0" />
 
         <TextView
+            android:id="@+id/txtHateCount"
             android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dark_gray_border_box"
             android:padding="10dp"
             android:text="싫어요 0" />
-
 
 
     </LinearLayout>

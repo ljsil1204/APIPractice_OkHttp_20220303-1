@@ -9,8 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.neppplus.apipractice_okhttp_20220303.R
+import com.neppplus.apipractice_okhttp_20220303.ViewTopicDetailActivity
 import com.neppplus.apipractice_okhttp_20220303.datas.ReplyData
 import com.neppplus.apipractice_okhttp_20220303.datas.TopicData
+import com.neppplus.apipractice_okhttp_20220303.utils.ServerUtil
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,6 +39,10 @@ class ReplyAdapter(
         val txtReplyContent = row.findViewById<TextView>(R.id.txtReplyContent)
         val txtCreatedAt = row.findViewById<TextView>(R.id.txtCreatedAt)
 
+        val txtReReplyCount = row.findViewById<TextView>(R.id.txtReReplyCount)
+        val txtLikeCount = row.findViewById<TextView>(R.id.txtLikeCount)
+        val txtHateCount = row.findViewById<TextView>(R.id.txtHateCount)
+
 
         txtReplyContent.text = data.content
         txtWriterNickname.text = data.writer.nickname
@@ -58,6 +65,40 @@ class ReplyAdapter(
 //        sdf.format( Date객체 )  => 지정해둔 양식의 String으로 가공.
 //        createdAt : Calendar / format의 파라미터 : Date   =>   Calendar의 내용물인 time변수가 Date.
         txtCreatedAt.text =   data.getFormattedCreatedAt()
+
+
+        txtReReplyCount.text = "답글 ${data.reReplyCount}"
+        txtLikeCount.text = "좋아요 ${data.likeCount}"
+        txtHateCount.text = "싫어요 ${data.hateCount}"
+
+
+        txtLikeCount.setOnClickListener {
+
+//            서버에 이 댓글에 좋아요 알림.
+            ServerUtil.postRequestReplyLikeOrHate(
+                mContext,
+                data.id,
+                true,
+                object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(jsonObj: JSONObject) {
+
+//                        무조건 댓글 목록 새로 고침
+//                        Adapter 코딩 => 액티비티의 기능 실행.
+
+//                        어댑터 객체화시, mContext 변수에 어느 화면에서 사용하는지 대입.
+//                        mContext : Context 타입.  대입 객체 : ViewTopic액티비티 객체. => 다형성
+
+//                        부모 형태의 변수에 담긴 자식 객체는, 캐스팅을 통해서 원상 복구 가능.
+//                        자식에서 만든 별도의 함수들을 다시 사용 가능.
+
+                        (mContext as ViewTopicDetailActivity).getTopicDetailFromServer()
+
+                    }
+                }
+            )
+
+        }
+
 
         return row
 
